@@ -25,9 +25,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.quotes.R
 import com.example.quotes.domain.model.categories
 import com.example.quotes.domain.model.quoteCardList
+import com.example.quotes.navigation.QuotesScreenRoute
 import com.example.quotes.presentation.components.CategoryCard
 import com.example.quotes.presentation.components.QuoteCard
 import com.example.quotes.ui.theme.Bold12
@@ -41,7 +43,7 @@ import com.example.quotes.ui.theme.colorFFA9A9A9
 import com.example.quotes.ui.theme.colorFFF9CC18
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController) {
     val windowInfo = LocalWindowInfo.current
     val heightDp = with(LocalDensity.current) {
         windowInfo.containerSize.height.toDp()
@@ -52,10 +54,15 @@ fun HomeScreen() {
             .fillMaxSize()
             .padding(horizontal = 12.dp)
     ) {
+
         item {
             HomeHeader()
 
             Spacer(modifier = Modifier.height(15.dp))
+
+        }
+
+        item {
             Box(
                 modifier = Modifier
                     .height(heightDp * 0.2f)
@@ -69,9 +76,10 @@ fun HomeScreen() {
                     textAlign = TextAlign.Center
                 )
             }
+        }
 
-
-            // LatestQuotes Section
+        // LatestQuotes
+        item {
             Section(
                 sectionTitle = stringResource(R.string.latest_quotes),
                 onButtonClick = {}
@@ -79,7 +87,7 @@ fun HomeScreen() {
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
-                    items(quoteCardList) {item ->
+                    items(quoteCardList) { item ->
                         QuoteCard(
                             data = item,
                             onShareClick = {},
@@ -88,8 +96,10 @@ fun HomeScreen() {
                     }
                 }
             }
+        }
 
-            // Categories
+        // Categories
+        item {
             Section(
                 sectionTitle = stringResource(R.string.categories),
                 onButtonClick = {}
@@ -97,17 +107,20 @@ fun HomeScreen() {
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
-                    items(categories) {item ->
+                    items(categories) { item ->
                         CategoryCard(
                             item = item,
                             onCardClick = {
-
+                                navController.navigate("${QuotesScreenRoute.Explore.route}?category=${item.title}")
                             }
                         )
                     }
                 }
             }
+        }
 
+        // Trending Quotes
+        item {
             Section(
                 sectionTitle = stringResource(R.string.trending_quotes),
                 onButtonClick = {}

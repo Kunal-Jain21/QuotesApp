@@ -108,7 +108,7 @@ fun QuoteCardHeader(
         ) {}
 
         Row(
-            horizontalArrangement = Arrangement.spacedBy(10.dp,),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(

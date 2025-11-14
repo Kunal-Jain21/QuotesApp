@@ -35,10 +35,13 @@ import com.example.quotes.ui.theme.colorFFD3D3D5
 import com.example.quotes.ui.theme.colorFFFFFFFF
 
 @Composable
-fun ExploreScreen() {
-
+fun ExploreScreen(
+    preSelectedCategory: String?
+) {
     var selectedCategory by remember {
-        mutableStateOf<QuoteCategory?>(null)
+        mutableStateOf(
+            preSelectedCategory?.let { QuoteCategory.valueOf(it) }
+        )
     }
 
     val filteredQuotes = remember(selectedCategory) {
@@ -68,8 +71,9 @@ fun ExploreScreen() {
             LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                items(categories,
-                    key = {item -> item.title}) { category ->
+                items(
+                    categories,
+                    key = { item -> item.title }) { category ->
                     val isSelected = selectedCategory == category.title
                     Chip(
                         isSelected = isSelected,
@@ -104,7 +108,7 @@ fun Chip(
     Surface(
         onClick = onClick,
         shape = RoundedCornerShape(8.dp),
-        color = if (isSelected) category.iconTint else colorFFFFFFFF,
+        color = if (isSelected) category.color.iconTint else colorFFFFFFFF,
         border = BorderStroke(
             width = 1.dp,
             color = colorFFD3D3D5
@@ -115,7 +119,7 @@ fun Chip(
             style = Typography.Medium12.copy(
                 color = if (isSelected) colorFFFFFFFF else colorFF000000
             ),
-            modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp)
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp)
         )
     }
 }

@@ -41,10 +41,11 @@ fun QuoteComponent(
     val currentCategory = categories.find {
         it.title == data.category
     }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(currentCategory?.backgroundColor ?: colorFFEAEEF8, shape = RoundedCornerShape(10.dp))
+            .background(currentCategory?.color?.backgroundColor ?: colorFFEAEEF8, shape = RoundedCornerShape(10.dp))
             .padding(20.dp)
     ) {
         QuoteHeader(
@@ -67,7 +68,7 @@ fun QuoteComponent(
         Text(
             text = data.author,
             style = Typography.Medium12.copy(
-                color = currentCategory?.iconTint ?: colorFFBBC6E6
+                color = currentCategory?.color?.iconTint ?: colorFFBBC6E6
             )
         )
     }
@@ -83,7 +84,7 @@ private fun QuoteHeader(data: Quote, currentCategory: Category?, ) {
             modifier = Modifier
                 .size(32.dp)
                 .clip(CircleShape),
-            color = currentCategory?.circleColor ?: colorFFBDBDBD
+            color = currentCategory?.color?.circleColor ?: colorFFBDBDBD
         ) {
             Icon(
                 modifier = Modifier.padding(5.dp),
@@ -96,7 +97,7 @@ private fun QuoteHeader(data: Quote, currentCategory: Category?, ) {
         Text(
             text = data.category.name.lowercase().replaceFirstChar { it.uppercase() },
             style = Typography.Medium16.copy(
-                color = currentCategory?.iconTint ?: colorFF1E40AF
+                color = currentCategory?.color?.iconTint ?: colorFF1E40AF
             )
         )
     }

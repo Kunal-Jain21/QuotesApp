@@ -3,9 +3,10 @@ package com.example.quotes.presentation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.quotes.navigation.QuotesScreenRoute
 import com.example.quotes.presentation.screens.ExploreScreen
 import com.example.quotes.presentation.screens.HomeScreen
@@ -22,11 +23,25 @@ fun QuotesAppNavGraph(
         modifier = modifier
     ) {
         composable(route = QuotesScreenRoute.Home.route) {
-            HomeScreen()
+            HomeScreen(
+                navController = navController
+            )
         }
 
-        composable(route = QuotesScreenRoute.Explore.route) {
-            ExploreScreen()
+        composable(
+            route = "${QuotesScreenRoute.Explore.route}?category={category}",
+            arguments = listOf(
+                navArgument("category") {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                }
+            )
+        ) { backStackEntry ->
+            val category = backStackEntry.arguments?.getString("category")
+            ExploreScreen(
+                preSelectedCategory = category,
+            )
         }
 
         composable(route = QuotesScreenRoute.Saved.route) {

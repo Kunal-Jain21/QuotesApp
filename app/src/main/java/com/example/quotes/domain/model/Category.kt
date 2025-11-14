@@ -29,6 +29,10 @@ import com.example.quotes.ui.theme.colorFFF3E5F5
 data class Category(
     val title: QuoteCategory,
     val icon: ImageVector,
+    val color: CategoryColor,
+)
+
+data class CategoryColor(
     val backgroundColor: Color,   // outer card background
     val circleColor: Color,       // icon circle background
     val iconTint: Color           // icon tint
@@ -42,50 +46,70 @@ val categories = listOf(
     Category(
         title = QuoteCategory.Life,
         icon = Icons.Default.Favorite,
-        backgroundColor = colorFFEAEEF8,
-        circleColor = colorFFBBC6E6,
-        iconTint = colorFF1E40AF
+        color = CategoryColor(
+            backgroundColor = colorFFEAEEF8,
+            circleColor = colorFFBBC6E6,
+            iconTint = colorFF1E40AF
+        )
     ),
+
     Category(
         title = QuoteCategory.Motivation,
         icon = Icons.Default.Star,
-        backgroundColor = Color(0xFFFFF3E0),
-        circleColor = Color(0xFFFFE0B2),
-        iconTint = Color(0xFFFFA000)
+        color = CategoryColor(
+            backgroundColor = Color(0xFFFFF3E0),
+            circleColor = Color(0xFFFFE0B2),
+            iconTint = Color(0xFFFFA000)
+        )
     ),
+
     Category(
         title = QuoteCategory.Success,
         icon = Icons.Default.LocationOn,
-        backgroundColor = colorFFE8F5E9,
-        circleColor = colorFFA5D6A7,
-        iconTint = colorFF2E7D32
+        color = CategoryColor(
+            backgroundColor = colorFFE8F5E9,
+            circleColor = colorFFA5D6A7,
+            iconTint = colorFF2E7D32
+        )
     ),
+
     Category(
         title = QuoteCategory.Wisdom,
         icon = Icons.Default.Info,
-        backgroundColor = colorFFF3E5F5,
-        circleColor = colorFFCE93D8,
-        iconTint = colorFF6A1B9A
+        color = CategoryColor(
+            backgroundColor = colorFFF3E5F5,
+            circleColor = colorFFCE93D8,
+            iconTint = colorFF6A1B9A
+        )
     ),
+
     Category(
         title = QuoteCategory.Love,
         icon = Icons.Default.FavoriteBorder,
-        backgroundColor = Color(0xFFFCE4EC),
-        circleColor = Color(0xFFF8BBD0),
-        iconTint = Color(0xFFC2185B)
+        color = CategoryColor(
+            backgroundColor = Color(0xFFFCE4EC),
+            circleColor = Color(0xFFF8BBD0),
+            iconTint = Color(0xFFC2185B)
+        )
     ),
+
     Category(
         title = QuoteCategory.Courage,
         icon = Icons.Default.AccountBox,
-        backgroundColor = colorFFE9F4F8,
-        circleColor = colorFFB9DDE9,
-        iconTint = colorFF2786A9
+        color = CategoryColor(
+            backgroundColor = colorFFE9F4F8,
+            circleColor = colorFFB9DDE9,
+            iconTint = colorFF2786A9
+        )
     ),
+
     Category(
         title = QuoteCategory.Leadership,
         icon = Icons.Default.Person,
-        backgroundColor = colorFFEBEBED,
-        circleColor = colorFFBDBDBD,
-        iconTint = colorFF424242
-    ),
+        color = CategoryColor(
+            backgroundColor = colorFFEBEBED,
+            circleColor = colorFFBDBDBD,
+            iconTint = colorFF424242
+        )
+    )
 )

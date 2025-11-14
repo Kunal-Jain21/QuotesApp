@@ -20,20 +20,17 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.dp
 import com.example.quotes.domain.model.Quote
+import com.example.quotes.domain.model.categories
 import com.example.quotes.ui.theme.Medium12
 import com.example.quotes.ui.theme.Medium14
 import com.example.quotes.ui.theme.Typography
 import com.example.quotes.ui.theme.colorFF1E40AF
-import com.example.quotes.ui.theme.colorFF3F5DBF
-import com.example.quotes.ui.theme.colorFF455AA6
-import com.example.quotes.ui.theme.colorFF50639A
 import com.example.quotes.ui.theme.colorFFFFFFFF
 
 @Composable
@@ -43,22 +40,18 @@ fun QuoteCard(
     onShareClick: () -> Unit = {},
     onFavoriteClick: () -> Unit = {}
 ) {
+    val category = remember {
+        categories.find {
+            it.title == data.category
+        }
+    }
     Column(
         modifier = Modifier
             .width(200.dp)
             .height(220.dp)
             .clip(RoundedCornerShape(20.dp))
             .background(
-                brush = Brush.linearGradient(
-                    listOf(
-                        colorFF1E40AF,
-                        colorFF3F5DBF,
-                        colorFF455AA6,
-                        colorFF50639A
-                    ),
-                    start = Offset(0f, 0f),
-                    end = Offset(500f, 500f)
-                )
+                color = category?.color?.iconTint ?: colorFF1E40AF
             )
             .padding(20.dp)
     ) {

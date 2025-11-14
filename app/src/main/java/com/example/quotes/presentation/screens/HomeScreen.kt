@@ -21,9 +21,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.quotes.R
 import com.example.quotes.domain.model.categories
 import com.example.quotes.domain.model.quoteCardList
 import com.example.quotes.presentation.components.CategoryCard
@@ -71,7 +73,7 @@ fun HomeScreen() {
 
             // LatestQuotes Section
             Section(
-                sectionTitle = "Latest Quotes",
+                sectionTitle = stringResource(R.string.latest_quotes),
                 onButtonClick = {}
             ) {
                 LazyRow(
@@ -89,7 +91,7 @@ fun HomeScreen() {
 
             // Categories
             Section(
-                sectionTitle = "Categories",
+                sectionTitle = stringResource(R.string.categories),
                 onButtonClick = {}
             ) {
                 LazyRow(
@@ -107,7 +109,7 @@ fun HomeScreen() {
             }
 
             Section(
-                sectionTitle = "Trending Quotes",
+                sectionTitle = stringResource(R.string.trending_quotes),
                 onButtonClick = {}
             ) {
                 LazyRow(
@@ -129,13 +131,13 @@ fun HomeScreen() {
 @Composable
 private fun HomeHeader() {
     Text(
-        text = "Explore",
+        text = stringResource(R.string.explore),
         style = Typography.Bold20.copy(fontSize = 25.sp)
     )
 
     // Sub heading
     Text(
-        text = "Awesome Wuotes from out community",
+        text = stringResource(R.string.home_screen_subtitle),
         style = Typography.Medium12.copy(
             color = colorFFA9A9A9
         )

@@ -1,12 +1,12 @@
 package com.example.quotes.domain.model
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.automirrored.filled.TrendingUp
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Groups
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -42,31 +42,31 @@ val categories = listOf(
 
     Category(
         title = QuoteCategory.Success,
-        icon = Icons.Default.LocationOn,
+        icon = Icons.AutoMirrored.Filled.TrendingUp,
         color = colorFF2E7D32
     ),
 
     Category(
         title = QuoteCategory.Wisdom,
-        icon = Icons.Default.Info,
+        icon = Icons.Filled.Info,
         color = colorFF6A1B9A
     ),
 
     Category(
         title = QuoteCategory.Love,
-        icon = Icons.Default.FavoriteBorder,
+        icon = Icons.Filled.FavoriteBorder,
         color = colorFFC2185B
     ),
 
     Category(
         title = QuoteCategory.Courage,
-        icon = Icons.Default.AccountBox,
+        icon = Icons.Filled.Shield,
         color = colorFF2786A9
     ),
 
     Category(
         title = QuoteCategory.Leadership,
-        icon = Icons.Default.Person,
+        icon = Icons.Filled.Groups,
         color = colorFF424242
     )
 )

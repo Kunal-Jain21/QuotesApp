@@ -32,19 +32,25 @@ fun CategoryCard(
             .clickable(
                 onClick = { onCardClick(item.title) }
             )
-            .background(color = item.color.backgroundColor, shape = RoundedCornerShape(10.dp))
+            .background(
+                color = item.color.copy(
+                    alpha = 0.1F
+                ), shape = RoundedCornerShape(10.dp)
+            )
             .padding(horizontal = 10.dp, vertical = 14.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Surface(
-            color = item.color.circleColor,
+            color = item.color.copy(
+                alpha = 0.4F
+            ),
             shape = RoundedCornerShape(100.dp),
         ) {
             Icon(
                 modifier = Modifier.padding(8.dp),
                 imageVector = item.icon,
                 contentDescription = "Icon",
-                tint = item.color.iconTint
+                tint = item.color
             )
         }
 

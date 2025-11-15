@@ -25,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.dp
 import com.example.quotes.domain.model.Quote
 import com.example.quotes.domain.model.categories
@@ -52,7 +53,13 @@ fun QuoteCard(
             .height(220.dp)
             .clip(RoundedCornerShape(20.dp))
             .background(
-                color = category?.color?.iconTint ?: colorFF1E40AF
+                brush = Brush.linearGradient(
+                    colors = listOf(
+                        (category?.color ?: colorFF1E40AF),
+                        (category?.color ?: colorFF1E40AF).copy(alpha = 0.8F),
+                        (category?.color ?: colorFF1E40AF).copy(alpha = 0.6F),
+                    )
+                ),
             )
             .padding(20.dp)
     ) {

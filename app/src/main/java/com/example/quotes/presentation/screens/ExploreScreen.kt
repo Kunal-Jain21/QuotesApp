@@ -108,7 +108,7 @@ fun Chip(
     Surface(
         onClick = onClick,
         shape = RoundedCornerShape(8.dp),
-        color = if (isSelected) category.color.iconTint else colorFFFFFFFF,
+        color = if (isSelected) category.color else colorFFFFFFFF,
         border = BorderStroke(
             width = 1.dp,
             color = colorFFD3D3D5

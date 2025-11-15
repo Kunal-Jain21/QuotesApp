@@ -2,6 +2,14 @@
 
 A learning project to practice Android development with Jetpack Compose. This app displays inspirational quotes across multiple categories, allowing users to save favorites and explore quotes by category. Built as part of learning modern Android development practices.
 
+## 📸 Screenshots
+
+![Home Screen](screenshots/home_screen.png)
+![Explore Screen](screenshots/explore_screen.png)
+![Saved Screen](screenshots/saved_screen.png)
+
+> **Note:** Add your screenshots to the `screenshots/` folder at the project root. Name them as `home_screen.png`, `explore_screen.png`, and `saved_screen.png`.
+
 ## ✨ Features
 
 - **Home Screen**: Browse latest quotes, trending quotes, and explore categories
@@ -98,13 +106,6 @@ app/src/main/java/com/example/quotes/
 # Install on connected device
 ./gradlew installDebug
 ```
-
-## 📸 Screenshots
-
-<!-- ![Home Screen](screenshots/home_screen.png) -->
-<!-- ![Explore Screen](screenshots/explore_screen.png) -->
-<!-- ![Saved Screen](screenshots/saved_screen.png) -->
-
 
 ## 📱 Screens
 

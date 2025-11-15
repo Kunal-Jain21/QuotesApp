@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Icon
@@ -36,7 +37,7 @@ import com.example.quotes.ui.theme.colorFFFFFFFF
 @Composable
 fun QuoteCard(
     data: Quote,
-    modifier: Modifier = Modifier,
+    isFavorite: Boolean = false,
     onShareClick: () -> Unit = {},
     onFavoriteClick: () -> Unit = {}
 ) {
@@ -57,6 +58,7 @@ fun QuoteCard(
     ) {
         // Top
         QuoteCardHeader(
+            isFavorite = isFavorite,
             onShareClick = onShareClick,
             onFavoriteClick = onFavoriteClick
         )
@@ -85,6 +87,7 @@ fun QuoteCard(
 
 @Composable
 fun QuoteCardHeader(
+    isFavorite: Boolean = false,
     onShareClick: () -> Unit,
     onFavoriteClick: () -> Unit
 ) {
@@ -120,8 +123,8 @@ fun QuoteCardHeader(
                 onClick = onFavoriteClick
             ) {
                 Icon(
-                    imageVector = Icons.Default.FavoriteBorder,
-                    contentDescription = "Favorite",
+                    imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                    contentDescription = if (isFavorite) "Remove from favorites" else "Add to favorites",
                     tint = colorFFFFFFFF
                 )
             }

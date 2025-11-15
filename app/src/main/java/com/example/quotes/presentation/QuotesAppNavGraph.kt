@@ -15,7 +15,8 @@ import com.example.quotes.presentation.screens.SavedScreen
 @Composable
 fun QuotesAppNavGraph(
     navController: NavHostController,
-    modifier: Modifier
+    modifier: Modifier,
+    savedQuotesState: SavedQuotesState
 ) {
     NavHost(
         navController = navController,
@@ -24,7 +25,8 @@ fun QuotesAppNavGraph(
     ) {
         composable(route = QuotesScreenRoute.Home.route) {
             HomeScreen(
-                navController = navController
+                navController = navController,
+                savedQuotesState = savedQuotesState
             )
         }
 
@@ -45,7 +47,9 @@ fun QuotesAppNavGraph(
         }
 
         composable(route = QuotesScreenRoute.Saved.route) {
-            SavedScreen()
+            SavedScreen(
+                savedQuotesState = savedQuotesState
+            )
         }
     }
 }

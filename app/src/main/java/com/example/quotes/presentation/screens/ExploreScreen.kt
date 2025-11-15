@@ -26,7 +26,7 @@ import com.example.quotes.domain.model.Category
 import com.example.quotes.domain.model.QuoteCategory
 import com.example.quotes.domain.model.categories
 import com.example.quotes.domain.model.quoteCardList
-import com.example.quotes.presentation.components.QuoteComponent
+import com.example.quotes.presentation.components.ExploreQuoteCard
 import com.example.quotes.ui.theme.Bold20
 import com.example.quotes.ui.theme.Medium12
 import com.example.quotes.ui.theme.Typography
@@ -91,7 +91,7 @@ fun ExploreScreen(
         items(
             items = filteredQuotes,
             key = { item -> item.id }) { cardData ->
-            QuoteComponent(
+            ExploreQuoteCard(
                 data = cardData
             )
         }

@@ -35,7 +35,7 @@ import com.example.quotes.ui.theme.colorFFBDBDBD
 import com.example.quotes.ui.theme.colorFFEAEEF8
 
 @Composable
-fun QuoteComponent(
+fun ExploreQuoteCard(
     data: Quote,
 ) {
     val currentCategory = categories.find {

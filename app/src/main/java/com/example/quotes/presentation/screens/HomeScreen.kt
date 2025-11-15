@@ -30,6 +30,7 @@ import com.example.quotes.R
 import com.example.quotes.domain.model.categories
 import com.example.quotes.domain.model.quoteCardList
 import com.example.quotes.navigation.QuotesScreenRoute
+import com.example.quotes.presentation.SavedQuotesState
 import com.example.quotes.presentation.components.CategoryCard
 import com.example.quotes.presentation.components.QuoteCard
 import com.example.quotes.ui.theme.Bold12
@@ -43,7 +44,10 @@ import com.example.quotes.ui.theme.colorFFA9A9A9
 import com.example.quotes.ui.theme.colorFFF9CC18
 
 @Composable
-fun HomeScreen(navController: NavHostController) {
+fun HomeScreen(
+    navController: NavHostController,
+    savedQuotesState: SavedQuotesState
+) {
     val windowInfo = LocalWindowInfo.current
     val heightDp = with(LocalDensity.current) {
         windowInfo.containerSize.height.toDp()
@@ -90,8 +94,11 @@ fun HomeScreen(navController: NavHostController) {
                     items(quoteCardList) { item ->
                         QuoteCard(
                             data = item,
+                            isFavorite = savedQuotesState.isSaved(item.id),
                             onShareClick = {},
-                            onFavoriteClick = {}
+                            onFavoriteClick = {
+                                savedQuotesState.toggleSave(item)
+                            }
                         )
                     }
                 }
@@ -131,8 +138,11 @@ fun HomeScreen(navController: NavHostController) {
                     items(quoteCardList) { item ->
                         QuoteCard(
                             data = item,
+                            isFavorite = savedQuotesState.isSaved(item.id),
                             onShareClick = {},
-                            onFavoriteClick = {}
+                            onFavoriteClick = {
+                                savedQuotesState.toggleSave(item)
+                            }
                         )
                     }
                 }

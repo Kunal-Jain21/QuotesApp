@@ -33,6 +33,7 @@ import com.example.quotes.ui.theme.Medium12
 import com.example.quotes.ui.theme.Medium14
 import com.example.quotes.ui.theme.Typography
 import com.example.quotes.ui.theme.colorFF1E40AF
+import com.example.quotes.ui.theme.colorFFFF0000
 import com.example.quotes.ui.theme.colorFFFFFFFF
 
 @Composable
@@ -132,7 +133,7 @@ fun QuoteCardHeader(
                 Icon(
                     imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                     contentDescription = if (isFavorite) "Remove from favorites" else "Add to favorites",
-                    tint = colorFFFFFFFF
+                    tint = if (isFavorite) colorFFFF0000 else colorFFFFFFFF
                 )
             }
         }

@@ -5,4 +5,5 @@
     <string name="latest_quotes">Latest Quotes</string>
     <string name="categories">Categories</string>
     <string name="trending_quotes">Trending Quotes</string>
+    <string name="view_all">View All</string>
 </resources>

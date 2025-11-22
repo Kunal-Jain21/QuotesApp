@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -86,7 +87,10 @@ fun HomeScreen(
         item {
             Section(
                 sectionTitle = stringResource(R.string.latest_quotes),
-                onButtonClick = {}
+                buttonText = stringResource(R.string.view_all),
+                onButtonClick = {
+                    navController.navigate(QuotesScreenRoute.Explore.route)
+                }
             ) {
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -130,7 +134,10 @@ fun HomeScreen(
         item {
             Section(
                 sectionTitle = stringResource(R.string.trending_quotes),
-                onButtonClick = {}
+                buttonText = stringResource(R.string.view_all),
+                onButtonClick = {
+                    navController.navigate(QuotesScreenRoute.Explore.route)
+                }
             ) {
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -170,6 +177,7 @@ private fun HomeHeader() {
 @Composable
 fun Section(
     sectionTitle: String,
+    buttonText: String? = null,
     onButtonClick: () -> Unit,
     sectionContent: @Composable () -> Unit
 ) {
@@ -180,7 +188,9 @@ fun Section(
     ) {
 
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 40.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -189,16 +199,18 @@ fun Section(
                 style = Typography.Bold16.copy(color = colorFF000000)
             )
 
-            TextButton(
-                onClick = onButtonClick
-            ) {
-                Text(
-                    text = "View All",
-                    style = Typography.Bold12.copy(
-                        fontSize = 12.sp,
-                        color = colorFF596FC6
+            buttonText?.let {
+                TextButton(
+                    onClick = onButtonClick
+                ) {
+                    Text(
+                        text = it,
+                        style = Typography.Bold12.copy(
+                            fontSize = 12.sp,
+                            color = colorFF596FC6
+                        )
                     )
-                )
+                }
             }
         }
 

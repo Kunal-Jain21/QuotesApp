@@ -26,6 +26,7 @@ import com.example.quotes.domain.model.Category
 import com.example.quotes.domain.model.QuoteCategory
 import com.example.quotes.domain.model.categories
 import com.example.quotes.domain.model.quoteCardList
+import com.example.quotes.presentation.SavedQuotesState
 import com.example.quotes.presentation.components.ExploreQuoteCard
 import com.example.quotes.ui.theme.Bold20
 import com.example.quotes.ui.theme.Medium12
@@ -36,7 +37,8 @@ import com.example.quotes.ui.theme.colorFFFFFFFF
 
 @Composable
 fun ExploreScreen(
-    preSelectedCategory: String?
+    preSelectedCategory: String?,
+    savedQuotesState: SavedQuotesState
 ) {
     var selectedCategory by remember {
         mutableStateOf(
@@ -72,8 +74,9 @@ fun ExploreScreen(
                 horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 items(
-                    categories,
-                    key = { item -> item.title }) { category ->
+                    items = categories,
+                    key = { item -> item.title }
+                ) { category ->
                     val isSelected = selectedCategory == category.title
                     Chip(
                         isSelected = isSelected,
@@ -92,7 +95,9 @@ fun ExploreScreen(
             items = filteredQuotes,
             key = { item -> item.id }) { cardData ->
             ExploreQuoteCard(
-                data = cardData
+                data = cardData,
+                isSaved = savedQuotesState.isSaved(cardData.id),
+                onFavoriteClick = { savedQuotesState.toggleSave(cardData) }
             )
         }
     }

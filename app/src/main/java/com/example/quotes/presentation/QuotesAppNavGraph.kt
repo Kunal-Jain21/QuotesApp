@@ -43,6 +43,7 @@ fun QuotesAppNavGraph(
             val category = backStackEntry.arguments?.getString("category")
             ExploreScreen(
                 preSelectedCategory = category,
+                savedQuotesState = savedQuotesState,
             )
         }
 

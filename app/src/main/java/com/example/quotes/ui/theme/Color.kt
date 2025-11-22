@@ -21,6 +21,7 @@ val colorFFD3D3D5 = Color(0xFFD3D3D5)
 val colorFF296ED1 = Color(0xFF296ED1)
 val colorFFFFA000 = Color(0xFFFFA000)
 val colorFFC2185B = Color(0xFFC2185B)
+val colorFFFF0000 = Color(0xFFFF0000)
 
 val colorFF2E7D32 = Color(0xFF2E7D32) // Deep Green icon tint
 val colorFF6A1B9A = Color(0xFF6A1B9A) // Rich Purple icon tint

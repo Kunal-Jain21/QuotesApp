@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -50,7 +51,7 @@ fun SavedScreen(savedQuotesState: SavedQuotesState) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 64.dp),
-                    horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
                         text = "No saved quotes yet",
@@ -74,7 +75,11 @@ fun SavedScreen(savedQuotesState: SavedQuotesState) {
                 items = savedQuotes,
                 key = { it.id }
             ) { quote ->
-                ExploreQuoteCard(data = quote)
+                ExploreQuoteCard(
+                    data = quote,
+                    isSaved = savedQuotesState.isSaved(quote.id),
+                    onFavoriteClick = { savedQuotesState.toggleSave(quote) },
+                )
             }
         }
     }

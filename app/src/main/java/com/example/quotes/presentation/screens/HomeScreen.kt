@@ -18,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
@@ -52,6 +53,17 @@ fun HomeScreen(
     val windowInfo = LocalWindowInfo.current
     val heightDp = with(LocalDensity.current) {
         windowInfo.containerSize.height.toDp()
+    }
+
+    // Latest quotes: Show the most recent quotes (last 6 quotes)
+    val latestQuotes = remember {
+        quoteCardList.takeLast(6)
+    }
+
+    // Trending quotes: Show quotes that are not in latest quotes (ensures no overlap)
+    val trendingQuotes = remember {
+        val latestIds = latestQuotes.map { it.id }.toSet()
+        quoteCardList.filter { it.id !in latestIds }.take(6)
     }
 
     LazyColumn(
@@ -95,13 +107,13 @@ fun HomeScreen(
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
-                    items(quoteCardList) { item ->
+                    items(latestQuotes) { quote ->
                         QuoteCard(
-                            data = item,
-                            isFavorite = savedQuotesState.isSaved(item.id),
-                            onShareClick = {},
-                            onFavoriteClick = {
-                                savedQuotesState.toggleSave(item)
+                            quote = quote,
+                            isSaved = savedQuotesState.isSaved(quote.id),
+                            onShareButtonClick = {},
+                            onSaveButtonClick = {
+                                savedQuotesState.toggleSave(quote)
                             }
                         )
                     }
@@ -120,9 +132,9 @@ fun HomeScreen(
                 ) {
                     items(categories) { item ->
                         CategoryCard(
-                            item = item,
+                            category = item,
                             onCardClick = {
-                                navController.navigate("${QuotesScreenRoute.Explore.route}?category=${item.title}")
+                                navController.navigate("${QuotesScreenRoute.Explore.route}?category=${item.name}")
                             }
                         )
                     }
@@ -142,13 +154,13 @@ fun HomeScreen(
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
-                    items(quoteCardList) { item ->
+                    items(trendingQuotes) { quote ->
                         QuoteCard(
-                            data = item,
-                            isFavorite = savedQuotesState.isSaved(item.id),
-                            onShareClick = {},
-                            onFavoriteClick = {
-                                savedQuotesState.toggleSave(item)
+                            quote = quote,
+                            isSaved = savedQuotesState.isSaved(quote.id),
+                            onShareButtonClick = {},
+                            onSaveButtonClick = {
+                                savedQuotesState.toggleSave(quote)
                             }
                         )
                     }

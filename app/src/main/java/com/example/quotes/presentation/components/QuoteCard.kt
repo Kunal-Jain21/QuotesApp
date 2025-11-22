@@ -21,33 +21,25 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.dp
 import com.example.quotes.domain.model.Quote
-import com.example.quotes.domain.model.categories
 import com.example.quotes.ui.theme.Medium12
 import com.example.quotes.ui.theme.Medium14
 import com.example.quotes.ui.theme.Typography
-import com.example.quotes.ui.theme.colorFF1E40AF
 import com.example.quotes.ui.theme.colorFFFF0000
 import com.example.quotes.ui.theme.colorFFFFFFFF
 
 @Composable
 fun QuoteCard(
-    data: Quote,
-    isFavorite: Boolean = false,
-    onShareClick: () -> Unit = {},
-    onFavoriteClick: () -> Unit = {}
+    quote: Quote,
+    isSaved: Boolean = false,
+    onShareButtonClick: () -> Unit = {},
+    onSaveButtonClick: () -> Unit = {}
 ) {
-    val category = remember {
-        categories.find {
-            it.title == data.category
-        }
-    }
     Column(
         modifier = Modifier
             .width(200.dp)
@@ -56,9 +48,9 @@ fun QuoteCard(
             .background(
                 brush = Brush.linearGradient(
                     colors = listOf(
-                        (category?.color ?: colorFF1E40AF),
-                        (category?.color ?: colorFF1E40AF).copy(alpha = 0.8F),
-                        (category?.color ?: colorFF1E40AF).copy(alpha = 0.6F),
+                        quote.category.color,
+                        quote.category.color.copy(alpha = 0.8F),
+                        quote.category.color.copy(alpha = 0.6F),
                     )
                 ),
             )
@@ -66,16 +58,16 @@ fun QuoteCard(
     ) {
         // Top
         QuoteCardHeader(
-            isFavorite = isFavorite,
-            onShareClick = onShareClick,
-            onFavoriteClick = onFavoriteClick
+            isFavorite = isSaved,
+            onShareClick = onShareButtonClick,
+            onFavoriteClick = onSaveButtonClick
         )
 
         Spacer(modifier = Modifier.weight(1f))
 
         // Quote Text
         Text(
-            text = data.text,
+            text = quote.text,
             style = Typography.Medium14.copy(
                 color = colorFFFFFFFF
             )
@@ -85,7 +77,7 @@ fun QuoteCard(
 
         // name text
         Text(
-            text = data.author,
+            text = quote.author,
             style = Typography.Medium12.copy(
                 color = colorFFFFFFFF.copy(alpha = 0.5F)
             )

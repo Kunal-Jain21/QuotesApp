@@ -19,54 +19,65 @@ import com.example.quotes.ui.theme.colorFFC2185B
 import com.example.quotes.ui.theme.colorFFFFA000
 
 data class Category(
-    val title: QuoteCategory,
+    val name: String,
     val icon: ImageVector,
     val color: Color,
-)
+) {
+    companion object {
+        val Life = Category(
+            name = "Life",
+            icon = Icons.Default.Favorite,
+            color = colorFF1E40AF
+        )
 
-enum class QuoteCategory {
-    Life, Motivation, Success, Wisdom, Love, Courage, Leadership
+        val Motivation = Category(
+            name = "Motivation",
+            icon = Icons.Default.Star,
+            color = colorFFFFA000
+        )
+
+        val Success = Category(
+            name = "Success",
+            icon = Icons.AutoMirrored.Filled.TrendingUp,
+            color = colorFF2E7D32
+        )
+
+        val Wisdom = Category(
+            name = "Wisdom",
+            icon = Icons.Filled.Info,
+            color = colorFF6A1B9A
+        )
+
+        val Love = Category(
+            name = "Love",
+            icon = Icons.Filled.FavoriteBorder,
+            color = colorFFC2185B
+        )
+
+        val Courage = Category(
+            name = "Courage",
+            icon = Icons.Filled.Shield,
+            color = colorFF2786A9
+        )
+
+        val Leadership = Category(
+            name = "Leadership",
+            icon = Icons.Filled.Groups,
+            color = colorFF424242
+        )
+
+        fun findByName(name: String): Category? {
+            return categories.find { it.name == name }
+        }
+    }
 }
 
 val categories = listOf(
-    Category(
-        title = QuoteCategory.Life,
-        icon = Icons.Default.Favorite,
-        color = colorFF1E40AF
-    ),
-    Category(
-        title = QuoteCategory.Motivation,
-        icon = Icons.Default.Star,
-        color = colorFFFFA000
-    ),
-
-    Category(
-        title = QuoteCategory.Success,
-        icon = Icons.AutoMirrored.Filled.TrendingUp,
-        color = colorFF2E7D32
-    ),
-
-    Category(
-        title = QuoteCategory.Wisdom,
-        icon = Icons.Filled.Info,
-        color = colorFF6A1B9A
-    ),
-
-    Category(
-        title = QuoteCategory.Love,
-        icon = Icons.Filled.FavoriteBorder,
-        color = colorFFC2185B
-    ),
-
-    Category(
-        title = QuoteCategory.Courage,
-        icon = Icons.Filled.Shield,
-        color = colorFF2786A9
-    ),
-
-    Category(
-        title = QuoteCategory.Leadership,
-        icon = Icons.Filled.Groups,
-        color = colorFF424242
-    )
+    Category.Life,
+    Category.Motivation,
+    Category.Success,
+    Category.Wisdom,
+    Category.Love,
+    Category.Courage,
+    Category.Leadership
 )

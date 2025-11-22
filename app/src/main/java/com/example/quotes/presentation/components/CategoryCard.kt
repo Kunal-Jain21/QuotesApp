@@ -16,24 +16,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.quotes.domain.model.Category
-import com.example.quotes.domain.model.QuoteCategory
 import com.example.quotes.ui.theme.Medium12
 import com.example.quotes.ui.theme.Typography
 import com.example.quotes.ui.theme.colorFF000000
 
 @Composable
 fun CategoryCard(
-    item: Category,
-    onCardClick: (QuoteCategory) -> Unit,
+    category: Category,
+    onCardClick: (Category) -> Unit,
 ) {
     Column(
         modifier = Modifier
             .width(90.dp)
             .clickable(
-                onClick = { onCardClick(item.title) }
+                onClick = { onCardClick(category) }
             )
             .background(
-                color = item.color.copy(
+                color = category.color.copy(
                     alpha = 0.1F
                 ), shape = RoundedCornerShape(10.dp)
             )
@@ -41,23 +40,23 @@ fun CategoryCard(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Surface(
-            color = item.color.copy(
+            color = category.color.copy(
                 alpha = 0.4F
             ),
             shape = RoundedCornerShape(100.dp),
         ) {
             Icon(
                 modifier = Modifier.padding(8.dp),
-                imageVector = item.icon,
+                imageVector = category.icon,
                 contentDescription = "Icon",
-                tint = item.color
+                tint = category.color
             )
         }
 
         Spacer(modifier = Modifier.height(10.dp))
 
         Text(
-            text = item.title.name,
+            text = category.name,
             style = Typography.Medium12.copy(
                 color = colorFF000000
             )

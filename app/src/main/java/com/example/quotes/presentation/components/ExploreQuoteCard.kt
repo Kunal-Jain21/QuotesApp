@@ -25,52 +25,41 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.quotes.domain.model.Category
 import com.example.quotes.domain.model.Quote
-import com.example.quotes.domain.model.categories
 import com.example.quotes.ui.theme.Medium12
 import com.example.quotes.ui.theme.Medium16
 import com.example.quotes.ui.theme.Typography
 import com.example.quotes.ui.theme.colorFF000000
-import com.example.quotes.ui.theme.colorFF1E40AF
 import com.example.quotes.ui.theme.colorFF296ED1
-import com.example.quotes.ui.theme.colorFFBBC6E6
-import com.example.quotes.ui.theme.colorFFBDBDBD
-import com.example.quotes.ui.theme.colorFFEAEEF8
 import com.example.quotes.ui.theme.colorFFFF0000
 import com.example.quotes.ui.theme.colorFFFFFFFF
 
 @Composable
 fun ExploreQuoteCard(
-    data: Quote,
+    quote: Quote,
     isSaved: Boolean,
-    onFavoriteClick: () -> Unit,
+    onSaveButtonClick: () -> Unit,
 ) {
-    val currentCategory = categories.find {
-        it.title == data.category
-    }
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .background(
-                (currentCategory?.color ?: colorFFEAEEF8).copy(
+                quote.category.color.copy(
                     alpha = 0.1F
                 ), shape = RoundedCornerShape(10.dp)
             )
             .padding(20.dp)
     ) {
         QuoteHeader(
-            data = data,
-            currentCategory = currentCategory,
+            quote = quote,
             isFavorite = isSaved,
-            onFavoriteClick = onFavoriteClick,
+            onFavoriteClick = onSaveButtonClick,
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = data.text,
+            text = quote.text,
             style = Typography.Medium16.copy(
                 fontSize = 17.sp,
                 color = colorFF000000
@@ -80,9 +69,9 @@ fun ExploreQuoteCard(
         Spacer(modifier = Modifier.height(20.dp))
 
         Text(
-            text = data.author,
+            text = quote.author,
             style = Typography.Medium12.copy(
-                color = currentCategory?.color ?: colorFFBBC6E6
+                color = quote.category.color
             )
         )
     }
@@ -90,8 +79,7 @@ fun ExploreQuoteCard(
 
 @Composable
 private fun QuoteHeader(
-    data: Quote,
-    currentCategory: Category?,
+    quote: Quote,
     onFavoriteClick: () -> Unit,
     isFavorite: Boolean
 ) {
@@ -104,7 +92,7 @@ private fun QuoteHeader(
             modifier = Modifier
                 .size(38.dp)
                 .clip(CircleShape),
-            color = (currentCategory?.color ?: colorFFBDBDBD).copy(alpha = 0.4F)
+            color = quote.category.color.copy(alpha = 0.4F)
         ) {
             Icon(
                 modifier = Modifier.padding(5.dp),
@@ -131,9 +119,9 @@ private fun QuoteHeader(
             }
 
             Text(
-                text = data.category.name.lowercase().replaceFirstChar { it.uppercase() },
+                text = quote.category.name.lowercase().replaceFirstChar { it.uppercase() },
                 style = Typography.Medium16.copy(
-                    color = currentCategory?.color ?: colorFF1E40AF
+                    color = quote.category.color
                 )
             )
         }

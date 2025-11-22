@@ -1,6 +1,5 @@
 package com.example.quotes.presentation.screens
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
@@ -23,7 +22,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.quotes.R
 import com.example.quotes.domain.model.Category
-import com.example.quotes.domain.model.QuoteCategory
 import com.example.quotes.domain.model.categories
 import com.example.quotes.domain.model.quoteCardList
 import com.example.quotes.presentation.SavedQuotesState
@@ -42,7 +40,7 @@ fun ExploreScreen(
 ) {
     var selectedCategory by remember {
         mutableStateOf(
-            preSelectedCategory?.let { QuoteCategory.valueOf(it) }
+            preSelectedCategory?.let { Category.findByName(it) }
         )
     }
 
@@ -75,16 +73,15 @@ fun ExploreScreen(
             ) {
                 items(
                     items = categories,
-                    key = { item -> item.title }
+                    key = { item -> item.name }
                 ) { category ->
-                    val isSelected = selectedCategory == category.title
+                    val isSelected = selectedCategory == category
                     Chip(
                         isSelected = isSelected,
                         category = category,
                         onClick = {
-                            Log.d("Checking", "Onclick -> ${category.title}")
                             selectedCategory =
-                                if (isSelected) null else category.title
+                                if (isSelected) null else category
                         }
                     )
                 }
@@ -95,9 +92,9 @@ fun ExploreScreen(
             items = filteredQuotes,
             key = { item -> item.id }) { cardData ->
             ExploreQuoteCard(
-                data = cardData,
+                quote = cardData,
                 isSaved = savedQuotesState.isSaved(cardData.id),
-                onFavoriteClick = { savedQuotesState.toggleSave(cardData) }
+                onSaveButtonClick = { savedQuotesState.toggleSave(cardData) }
             )
         }
     }
@@ -120,7 +117,7 @@ fun Chip(
         )
     ) {
         Text(
-            text = category.title.name,
+            text = category.name,
             style = Typography.Medium12.copy(
                 color = if (isSelected) colorFFFFFFFF else colorFF000000
             ),

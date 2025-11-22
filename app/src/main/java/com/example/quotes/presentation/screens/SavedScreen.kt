@@ -76,9 +76,9 @@ fun SavedScreen(savedQuotesState: SavedQuotesState) {
                 key = { it.id }
             ) { quote ->
                 ExploreQuoteCard(
-                    data = quote,
+                    quote = quote,
                     isSaved = savedQuotesState.isSaved(quote.id),
-                    onFavoriteClick = { savedQuotesState.toggleSave(quote) },
+                    onSaveButtonClick = { savedQuotesState.toggleSave(quote) },
                 )
             }
         }

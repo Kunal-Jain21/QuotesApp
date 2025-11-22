@@ -32,7 +32,6 @@ import com.example.quotes.ui.theme.Typography
 import com.example.quotes.ui.theme.colorFF000000
 import com.example.quotes.ui.theme.colorFF296ED1
 import com.example.quotes.ui.theme.colorFFFF0000
-import com.example.quotes.ui.theme.colorFFFFFFFF
 
 @Composable
 fun ExploreQuoteCard(
@@ -114,7 +113,7 @@ private fun QuoteHeader(
                 Icon(
                     imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                     contentDescription = if (isFavorite) "Remove from favorites" else "Add to favorites",
-                    tint = if (isFavorite) colorFFFF0000 else colorFFFFFFFF
+                    tint = colorFFFF0000
                 )
             }
 
